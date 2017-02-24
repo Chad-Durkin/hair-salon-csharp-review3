@@ -25,6 +25,19 @@ namespace HairSalon
             Assert.Equal(0, result);
         }
 
+        [Fact]
+        public void Test_IdentityTest_ReturnTrueIfClientsAreIdentical()
+        {
+            // Arrange
+            Client client1 = new Client("olivia", 0);
+            Client client2 = new Client("olivia", 0);
+
+            // Act
+
+            // Assert
+            Assert.Equal(client1, client2);
+        }
+
         public void Dispose()
         {
             Client.DeleteAll();
