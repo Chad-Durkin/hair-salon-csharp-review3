@@ -1,0 +1,12 @@
+@{
+    Layout = "Shared/_Layout.cshtml";
+}
+
+<h1>Sign up with a Stylist</h1>
+<form action="/client/add" method="post">
+    <label for="client-name">Client Name:</label>
+    <input type="text" name="client-name">
+    <label for="stylist-name">Stylist Name:</label>
+    <input type="text" name="stylist-name">
+    <button type="submit" name="button">Become A Client!</button>
+</form>
