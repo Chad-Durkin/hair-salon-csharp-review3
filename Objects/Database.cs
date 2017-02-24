@@ -13,11 +13,11 @@ namespace HairSalon
 
         public static void CloseSqlConnections(SqlDataReader reader, SqlConnection connection)
         {
-            if (reader != null)
+            if(reader != null)
             {
                 reader.Close();
             }
-            if (connection != null)
+            if(connection != null)
             {
                 connection.Close();
             }
