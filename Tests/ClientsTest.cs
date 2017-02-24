@@ -47,9 +47,6 @@ namespace HairSalon
             // Act
             Client client2 = Client.GetAll()[0];
 
-            Console.WriteLine(client1.GetId());
-            Console.WriteLine(client2.GetId());
-
             // Assert
             Assert.Equal(client1, client2);
         }
