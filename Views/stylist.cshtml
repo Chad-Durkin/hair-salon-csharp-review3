@@ -1,0 +1,16 @@
+@{
+    Layout = "Shared/_Layout.cshtml";
+}
+
+<h1 class="center-align">@Model["stylist"].GetName() 's Clients</h1>
+
+@if(@Model["clients"].Count == 0)
+{
+    <h1 class="center-align">@Model["stylist"].GetName() Has No Clients</h1>
+}
+else{
+    @foreach(var client in Model["clients"])
+    {
+        <h5 class="center-align">@client.GetName() | <a href="/stylist/client/edit/@client.GetId()">Edit</a> | <a href="/stylist/client/delete/@client.GetId()">Delete</a></h5>
+    }
+}

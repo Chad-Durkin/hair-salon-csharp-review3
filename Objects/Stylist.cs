@@ -62,20 +62,47 @@ namespace HairSalon
 
         public void Save()
         {
+            if(IsNewStylist(this.GetName()) == -1)
+            {
+                SqlConnection conn = DB.Connection();
+                conn.Open();
+
+                SqlCommand cmd = new SqlCommand("INSERT INTO stylists (name) OUTPUT INSERTED.id VALUES (@StylistName);", conn);
+
+                cmd.Parameters.Add(new SqlParameter("@StylistName", this.GetName()));
+                SqlDataReader rdr = cmd.ExecuteReader();
+
+                while(rdr.Read())
+                {
+                    this._id = rdr.GetInt32(0);
+                }
+
+                DB.CloseSqlConnections(rdr, conn);
+            }
+        }
+
+        public static int IsNewStylist(string targetName)
+        {
+            int result;
+
             SqlConnection conn = DB.Connection();
             conn.Open();
 
-            SqlCommand cmd = new SqlCommand("INSERT INTO stylists (name) OUTPUT INSERTED.id VALUES (@StylistName);", conn);
-
-            cmd.Parameters.Add(new SqlParameter("@StylistName", this.GetName()));
+            SqlCommand cmd = new SqlCommand("SELECT * FROM stylists WHERE name = @TargetName;", conn);
+            cmd.Parameters.Add(new SqlParameter("@TargetName", targetName));
             SqlDataReader rdr = cmd.ExecuteReader();
 
-            while(rdr.Read())
+            if(rdr.Read())
             {
-                this._id = rdr.GetInt32(0);
+                result = rdr.GetInt32(0);
+            }
+            else{
+                result = -1;
             }
 
             DB.CloseSqlConnections(rdr, conn);
+
+            return result;
         }
 
         public static Stylist Find(int id)
