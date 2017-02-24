@@ -22,6 +22,6 @@ namespace HairSalon
                 connection.Close();
             }
         }
-        
+
     }
 }
