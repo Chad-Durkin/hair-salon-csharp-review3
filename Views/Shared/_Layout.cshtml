@@ -2,16 +2,18 @@
 <html>
 <head>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.0/css/materialize.min.css">
-    <link rel="stylesheet" href="/Contents/css/styles.css" type="text/css">
+    <link rel="stylesheet" href="/Content/css/styles.css" type="text/css">
     <script src="https://code.jquery.com/jquery-3.1.1.js" integrity="sha256-16cdPddA6VdVInumRGo6IbivbERE8p7CQR3HzTBuELA=" crossorigin="anonymous"></script>
     <script type="text/javascript" src="js/materialize.min.js"></script>
     <meta charset="utf-8">
     <title>Hair Salon</title>
 </head>
 <body>
-    @RenderBody()
-    <div class="footer" id="foot">
-        <h5 class="center-align"><a href="/client/add">Become A Client</a> | <a href="/stylist/add">Become A Stylist</a> | <a href="/">Home</a></h5>
+    <div class="container">
+        @RenderBody()
+        <div class="footer" id="foot">
+            <h5 class="center-align"><a class="waves-effect waves-light btn" href="/client/add">Become A Client</a> | <a class="waves-effect waves-light btn" href="/stylist/add">Become A Stylist</a> | <a class="waves-effect waves-light btn" href="/">Home</a></h5>
+        </div>
     </div>
 </body>
 </html>

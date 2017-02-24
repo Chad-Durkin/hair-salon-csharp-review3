@@ -6,11 +6,13 @@
 
 @if(@Model["clients"].Count == 0)
 {
-    <h1 class="center-align">@Model["stylist"].GetName() Has No Clients</h1>
+    <h2 class="center-align">@Model["stylist"].GetName() Has No Clients</h2>
 }
 else{
     @foreach(var client in Model["clients"])
     {
-        <h5 class="center-align">@client.GetName() | <a href="/stylist/client/edit/@client.GetId()">Edit</a> | <a href="/stylist/client/delete/@client.GetId()">Delete</a></h5>
+        <div class="collection">
+            <h5 class="center-align collection-item active">@client.GetName() | <a class="btn" href="/stylist/client/edit/@client.GetId()">Edit</a> | <a class="btn" href="/stylist/client/delete/@client.GetId()">Delete</a></h5>
+        </div>
     }
 }
