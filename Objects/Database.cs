@@ -6,9 +6,10 @@ namespace HairSalon
 {
     public class DB
     {
-        public static SqlConection Connection()
+        public static SqlConnection Connection()
         {
             SqlConnection conn = new SqlConnection(DBConfiguration.ConnectionString);
+            return conn;
         }
 
         public static void CloseSqlConnections(SqlDataReader reader, SqlConnection connection)
@@ -21,6 +22,15 @@ namespace HairSalon
             {
                 connection.Close();
             }
+        }
+
+        public static void TableDeleteAll(string tableName)
+        {
+            SqlConnection conn = DB.Connection();
+            conn.Open();
+            SqlCommand cmd = new SqlCommand("DELETE FROM " + tableName + ";", conn);
+            cmd.ExecuteNonQuery();
+            conn.Close();
         }
 
     }

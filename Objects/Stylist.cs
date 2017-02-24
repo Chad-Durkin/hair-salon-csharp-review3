@@ -50,12 +50,12 @@ namespace HairSalon
             while(rdr.Read())
             {
                 int stylistId = rdr.GetInt32(0);
-                string stylistName = rdr.GetSTring(1);
+                string stylistName = rdr.GetString(1);
                 Stylist newStylist = new Stylist(stylistName, stylistId);
                 allStylists.Add(newStylist);
             }
 
-            DB.CloseSqlConnection(rdr, conn);
+            DB.CloseSqlConnections(rdr, conn);
 
             return allStylists;
         }
@@ -68,16 +68,19 @@ namespace HairSalon
         {
             _id = id;
         }
-        public int GetName()
+        public string GetName()
         {
             return _name;
         }
-        public void SetName(int name)
+        public void SetName(string name)
         {
             _name = name;
         }
 
-
+        public static void DeleteAll()
+        {
+            DB.TableDeleteAll("stylists");
+        }
 
     }
 }

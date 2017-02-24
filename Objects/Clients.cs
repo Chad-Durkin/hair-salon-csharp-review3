@@ -18,18 +18,18 @@ namespace HairSalon
             _id = id;
         }
 
-        public override bool Equals(System.Object otherCuisine)
+        public override bool Equals(System.Object otherClient)
         {
-            if(!(otherCuisine is Cuisine))
+            if(!(otherClient is Client))
             {
                 return false;
             }
             else
             {
-                Cuisine newCuisine = (Cuisine) otherCuisine;
-                bool idEquality = this.GetId() == newCuisine.GetId();
-                bool nameEquality = this.GetName() == newCuisine.GetName();
-                bool stylistIdEquality = this.GetStylistId() == newCuisine.GetSytlistId();
+                Client newClient = (Client) otherClient;
+                bool idEquality = this.GetId() == newClient.GetId();
+                bool nameEquality = this.GetName() == newClient.GetName();
+                bool stylistIdEquality = this.GetStylistId() == newClient.GetStylistId();
                 return(idEquality && nameEquality);
             }
         }
@@ -39,57 +39,60 @@ namespace HairSalon
             return this.GetName().GetHashCode();
         }
 
-        public static List<Cuisine> GetAll()
+        public static List<Client> GetAll()
         {
-            List<Cuisine> allCuisines = new List<Cuisine>{};
+            List<Client> allClients = new List<Client>{};
 
             SqlConnection conn = DB.Connection();
             conn.Open();
 
-            SqlCommand cmd = new SqlCommand("SELECT * FROM cuisines;", conn);
+            SqlCommand cmd = new SqlCommand("SELECT * FROM clients;", conn);
 
             SqlDataReader rdr = cmd.ExecuteReader();
 
             while(rdr.Read())
             {
-                int cuisineId = rdr.GetInt32(0);
-                string cuisineName = rdr.GetSTring(1);
-                int cuisineStylistId = rdr.GetInt32(2);
-                Cuisine newCuisine = new Cuisine(cuisineName, cuisineId, cuisineStylistId);
-                allCuisines.Add(newCuisine);
+                int clientId = rdr.GetInt32(0);
+                string clientName = rdr.GetString(1);
+                int clientStylistId = rdr.GetInt32(2);
+                Client newClient = new Client(clientName, clientId, clientStylistId);
+                allClients.Add(newClient);
             }
 
-            DB.CloseSqlConnection(rdr, conn);
+            DB.CloseSqlConnections(rdr, conn);
 
-            return allCuisines;
+            return allClients;
         }
 
 
-                public int GetId()
-                {
-                    return _id;
-                }
-                public void SetId(int id)
-                {
-                    _id = id;
-                }
-                public int GetName()
-                {
-                    return _name;
-                }
-                public void SetName(int name)
-                {
-                    _name = name;
-                }
-                public int GetStylistId()
-                {
-                    return _stylistId;
-                }
-                public void SetStylistId(int stylistId)
-                {
-                    _stylistId = stylistId;
-                }
+        public int GetId()
+        {
+            return _id;
+        }
+        public void SetId(int id)
+        {
+            _id = id;
+        }
+        public string GetName()
+        {
+            return _name;
+        }
+        public void SetName(string name)
+        {
+            _name = name;
+        }
+        public int GetStylistId()
+        {
+            return _stylistId;
+        }
+        public void SetStylistId(int stylistId)
+        {
+            _stylistId = stylistId;
+        }
 
-
+        public static void DeleteAll()
+        {
+            DB.TableDeleteAll("clients");
+        }
     }
 }
