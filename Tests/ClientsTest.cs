@@ -6,11 +6,23 @@ using System.Data.SqlClient;
 
 namespace HairSalon
 {
-    public class RestaurantTest : IDisposable
+    public class ClientTest : IDisposable
     {
         public RestaurantTest()
         {
             DBConfiguration.ConnectionString = "Data Source=(localdb)\\mssqllocaldb;Initial Catalog=hair_salon_test;Integrated Security=SSPI;";
+        }
+
+        [Fact]
+        public void Test_ClientEmptyAtFirst()
+        {
+            // Arrange
+            int result = Client.GetAll().Count;
+
+            // Act
+
+            // Assert
+            Assert.Equal(0, result);
         }
     }
 }
