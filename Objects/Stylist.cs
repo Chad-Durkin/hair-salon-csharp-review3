@@ -60,6 +60,23 @@ namespace HairSalon
             return allStylists;
         }
 
+        public int GetId()
+        {
+            return _id;
+        }
+        public void SetId(int id)
+        {
+            _id = id;
+        }
+        public int GetName()
+        {
+            return _name;
+        }
+        public void SetName(int name)
+        {
+            _name = name;
+        }
+
 
 
     }
