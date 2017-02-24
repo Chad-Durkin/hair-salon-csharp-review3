@@ -98,14 +98,37 @@ namespace HairSalon
             Client client1 = new Client("martha", stylist1.GetId());
             Client client2 = new Client("marthas brother", stylist1.GetId());
             client1.Save();
+            client2.Save();
+
 
             // Act
             client1.Update("marthas brother");
             client1.SetId(0);
-            stylist1.SetId(0);
+            client2.SetId(0);
 
             // Assert
             Assert.Equal(client1, client2);
+        }
+
+        [Fact]
+        public void Test_Delete_ClientFromDatabase()
+        {
+            // Arrange
+            Stylist stylist1 = new Stylist("beth");
+            stylist1.Save();
+            Client client1 = new Client("martha", stylist1.GetId());
+            Client client2 = new Client("marthas brother", stylist1.GetId());
+            client1.Save();
+            client2.Save();
+
+            // Act
+            client1.Delete();
+            List<Client> allClient = Client.GetAll();
+            List<Client> testClient = new List<Client> {client2};
+
+
+            // Assert
+            Assert.Equal(allClient, testClient);
         }
 
 
